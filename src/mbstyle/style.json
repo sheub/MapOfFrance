@@ -20,7 +20,7 @@
     "pitch": 0,
     "sources": {
         "composite": {
-			"url": "mapbox://mapbox.mapbox-streets-v7,sheub.623zkazi,sheub.5wb1wtbj,sheub.0q76nwnl,sheub.4w8m41y7,sheub.4wjhcapt,sheub.byxxjcbp,sheub.9e12f1eo",
+			"url": "mapbox://mapbox.mapbox-streets-v7,sheub.623zkazi,sheub.5wb1wtbj,sheub.0q76nwnl,sheub.4w8m41y7,sheub.4wjhcapt,sheub.byxxjcbp,sheub.9e12f1eo,sheub.72t5vtea",
             "type": "vector"
         }
     },
@@ -2123,7 +2123,25 @@
                     0
                 ]
             }
-}
+		},
+        {
+            "id": "edifice-geres-par-les-monumen-3inr6v",
+            "type": "circle",
+            "source": "composite",
+            "source-layer": "Edifice_geres_par_Les_Monumen-3inr6v",
+            "filter": [
+                "==",
+                "$type",
+                "Point"
+            ],
+            "layout": {
+                "visibility": "visible"
+            },
+            "paint": {
+                "circle-color": "hsl(249, 91%, 34%)"
+            },
+            "interactive": true
+        }
 
     ],
     "created": "2018-07-30T15:02:08.289Z",
