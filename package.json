@@ -1,0 +1,23 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^1.4.2",
+    "@material-ui/icons": "^2.0.0",
+    "mapbox-gl": "^0.47.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-map-gl": "^3.3.2",
+    "react-scripts": "1.1.4",
+    "react-text-truncate": "^0.13.1",
+    "react-truncate": "^2.3.0",
+    "react-virtualized": "^9.20.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
