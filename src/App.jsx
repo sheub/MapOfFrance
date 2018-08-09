@@ -66,11 +66,11 @@ class App extends Component {
   }
 
   _resize = () => {
-    var drawerWidth = 8 * 7; //this.Drawer.theme.spacing.unit * 7;
+    var drawerWidth = 1;//8 * 7; //this.Drawer.theme.spacing.unit * 7;
     var height = 56;
 
     if (window.innerWidth > 600) {
-      drawerWidth = 8 * 9; //this.Drawer.theme.spacing.unit * 9;
+      //drawerWidth = 8 * 9; //this.Drawer.theme.spacing.unit * 9;
       height = 64;
     }
 

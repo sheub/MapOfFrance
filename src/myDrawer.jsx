@@ -103,10 +103,10 @@ const styles = theme => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen
         }),
-        width: theme.spacing.unit * 7,
-        [theme.breakpoints.up("sm")]: {
-            width: theme.spacing.unit * 9
-        }
+        width: 0,//theme.spacing.unit * 7,
+        // [theme.breakpoints.up("sm")]: {
+        //     width: theme.spacing.unit * 9
+        // }
     },
     appBarSpacer: theme.mixins.toolbar,
     content: {
@@ -120,9 +120,14 @@ class MyDrawer extends Component {
         super(props);
         this.state = {
             visibility: { Museum: false, Villages: true, Unesco: true, AOP: false, Jardins: true, GSF: true },
+            // Drawer opened per Default
             open:true
         };
         this._defaultLayers = defaultMapStyle.get("layers");
+        if (window.innerWidth < 600) {
+            // Close Drawer per default for small screens
+            this.state.open = false;
+          }
     }
 
     _onVisibilityChange(name, event) {
