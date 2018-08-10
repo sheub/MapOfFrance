@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
-import PropTypes from "prop-types";
 import classNames from "classnames";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,8 +14,20 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+
+import Collapse from '@material-ui/core/Collapse';
+import Avatar from '@material-ui/core/Avatar';
+
+
+
 import { fromJS } from 'immutable';
 import MAP_STYLE from './mbstyle/style.json';
 
@@ -33,7 +45,7 @@ import "./App.css";
 
 const defaultMapStyle = fromJS(MAP_STYLE);
 
-const categories = ['Unesco', 'Villages', 'Museum', 'AOP', 'Jardins', 'GSF'];
+const categories = ['Unesco', 'Villages', 'Museum', 'AOP', 'Jardins', 'GSF', 'MN'];
 
 // Layer id patterns by category
 const layerSelector = {
@@ -42,7 +54,8 @@ const layerSelector = {
     Unesco: /whs-frenchcorrected-dq63pv/,
     AOP: /n-inao-aop-fr-16md1w/,
     Jardins: /jardinfr-8nabpa/,
-    GSF: /gsf-frenchcorrected/
+    GSF: /gsf-frenchcorrected/,
+    MN: /edifice-geres-par-les-monumen-3inr6v/
 };
 
 
@@ -119,9 +132,11 @@ class MyDrawer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            visibility: { Museum: false, Villages: true, Unesco: true, AOP: false, Jardins: true, GSF: true },
+            visibility: { Museum: false, Villages: true, Unesco: true, AOP: false, Jardins: true, GSF: true, MN:true },
             // Drawer opened per Default
-            open:true
+            open:true,
+            list1Open:true,
+
         };
         this._defaultLayers = defaultMapStyle.get("layers");
         if (window.innerWidth < 600) {
@@ -138,6 +153,22 @@ class MyDrawer extends Component {
             visibility
         });
     }
+
+    // handleToggle = value => () => {
+    //     const { checked } = this.state;
+    //     const currentIndex = checked.indexOf(value);
+    //     const newChecked = [...checked];
+    
+    //     if (currentIndex === -1) {
+    //       newChecked.push(value);
+    //     } else {
+    //       newChecked.splice(currentIndex, 1);
+    //     }
+    
+    //     this.setState({
+    //       checked: newChecked,
+    //     });
+    //   };
 
     _updateMapStyle({ visibility }) {
         const layers = this._defaultLayers.filter(
@@ -174,6 +205,10 @@ class MyDrawer extends Component {
         this.setState({ [name]: event.target.checked });
     };
 
+    handleClick = () => {
+        this.setState(state => ({ list1Open: !state.list1Open }));
+      };
+
     render() {
         const { classes } = this.props;
 
@@ -186,7 +221,7 @@ class MyDrawer extends Component {
                     <MenuIcon />
                   </IconButton>
                   <Typography variant="title" color="inherit" noWrap className={classes.title}>
-                    Travel in France
+                    France découverte
                   </Typography>
                 </Toolbar>
               </AppBar>
@@ -197,34 +232,73 @@ class MyDrawer extends Component {
                   </IconButton>
                 </div>
                 <Divider />
-                <ListSubheader>Culture et Patrimoine</ListSubheader>
-                <div>
-                  <img src={VillagesIcon} className="controlPanelIcon" alt="Plus beaux Villages de France" title="Plus beaux Villages de France" />
-                  <FormControlLabel style={{ marginLeft: 0 }} control={<Checkbox checked={this.state.visibility["Villages"]} onChange={this._onVisibilityChange.bind(this, "Villages")} value="true" color="default" />} label="Villages de France" />
-                </div>
-                <div>
-                  <img src={UnescoIcon} className="controlPanelIcon" alt="Unesco World Heritage" title="Unesco World Heritage" />
-                  <FormControlLabel style={{ marginLeft: 0 }} control={<Checkbox checked={this.state.visibility["Unesco"]} onChange={this._onVisibilityChange.bind(this, "Unesco")} value="true" color="default" />} label="Unesco World Heritage" />
-                </div>
-                <div>
-                  <img src={JardinsIcon} className="controlPanelIcon" alt="Jardins remarquables" title="Jardins remarquables" />
-                  <FormControlLabel style={{ marginLeft: 0 }} control={<Checkbox checked={this.state.visibility["Jardins"]} onChange={this._onVisibilityChange.bind(this, "Jardins")} value="true" color="default" />} label="Jardins Remarquables" />
-                </div>
+                <ListItem button onClick={this.handleClick}>
 
-                <div>
-                  <img src={GSFIcon} className="controlPanelIcon" alt="Grand Site de France" title="Grand Site de France" />
-                  <FormControlLabel style={{ marginLeft: 0 }} control={<Checkbox checked={this.state.visibility["GSF"]} onChange={this._onVisibilityChange.bind(this, "GSF")} value="true" color="default" />} label="Grands Sites" />
-                </div>
+                        <ListSubheader>Culture et Patrimoine</ListSubheader>
+                        {this.state.list1Open ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                    <Collapse in={this.state.list1Open} timeout="auto" unmountOnExit>
 
-                <div>
-                  <img src={MuseumIcon} className="controlPanelIcon" alt="Museum" title="Museum" />
-                  <FormControlLabel style={{ marginLeft: 0 }} control={<Checkbox checked={this.state.visibility["Museum"]} onChange={this._onVisibilityChange.bind(this, "Museum")} value="true" color="default" />} label="Museum" />
-                </div>
+                        <List>
+                            <ListItem key={"Villages"} dense button className={classes.listItem} >
+                                <Checkbox checked={this.state.visibility["Villages"]} onChange={this._onVisibilityChange.bind(this, "Villages")} value="true" color="default" tabIndex={-1} disableRipple />
+                                <ListItemText primary={`Villages`} />
+                                <ListItemSecondaryAction>
+                                    <Avatar alt="Plus beaux Villages de France" title="Plus beaux Villages de France" src={VillagesIcon} />
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                            <ListItem key={"Unesco"} dense button className={classes.listItem} >
+                                <Checkbox checked={this.state.visibility["Unesco"]} onChange={this._onVisibilityChange.bind(this, "Unesco")} value="true" color="default" tabIndex={-1} disableRipple />
+                                <ListItemText primary={`Unesco`} />
+                                <ListItemSecondaryAction >
+                                    <Avatar  alt="Unesco World Heritage" title="Unesco World Heritage" src={UnescoIcon} />
+                                </ListItemSecondaryAction>
+                            </ListItem>
 
-                <div>
-                  <img src={AOPIcon} className="controlPanelIcon" alt="Apellations d'origine controllée" title="Apellations d'origine controllée" />
-                  <FormControlLabel style={{ marginLeft: 0 }} control={<Checkbox checked={this.state.visibility["AOP"]} onChange={this._onVisibilityChange.bind(this, "AOP")} value="true" color="default" />} label="AOP" />
-                </div>
+                            <ListItem key={"Jardins"} dense button className={classes.listItem} >
+                                <Checkbox checked={this.state.visibility["Jardins"]} onChange={this._onVisibilityChange.bind(this, "Jardins")} value="true" color="default" tabIndex={-1} disableRipple />
+                                <ListItemText primary={`Jardins`} />
+                                <ListItemSecondaryAction >
+                                    <Avatar alt="Jardins remarquables" title="Jardins remarquables" src={JardinsIcon} />
+                                </ListItemSecondaryAction>
+                            </ListItem>
+
+                            <ListItem key={"GSF"} dense button className={classes.listItem}>
+                                <Checkbox checked={this.state.visibility["GSF"]} onChange={this._onVisibilityChange.bind(this, "GSF")} value="true" color="default" tabIndex={-1} disableRipple />
+                                <ListItemText primary={`Grands Sites`} />
+                                <ListItemSecondaryAction>
+                                    <Avatar alt="Grand Site de France" title="Grand Site de France" src={GSFIcon} />
+                                </ListItemSecondaryAction>
+                            </ListItem>
+
+                            <ListItem key={"MN"} dense button className={classes.listItem}>
+                                <Checkbox checked={this.state.visibility["MN"]} onChange={this._onVisibilityChange.bind(this, "MN")} value="true" color="default" tabIndex={-1} disableRipple />
+                                <ListItemText primary={`Monuments`} />
+                                <ListItemSecondaryAction>
+                                    <Avatar alt="Monuments Nationaux" title="Monuments Nationaux" src={GSFIcon} />
+                                </ListItemSecondaryAction>
+                            </ListItem>
+
+                            <ListItem key={5} dense button className={classes.listItem} >
+                                <Checkbox checked={this.state.visibility["Museum"]} onChange={this._onVisibilityChange.bind(this, "Museum")} value="true" color="default" tabIndex={-1} disableRipple />
+                                <ListItemText primary={`Museum`} />
+                                <ListItemSecondaryAction>
+                                    <Avatar alt="Museum" title="Museum" src={MuseumIcon} />
+                                </ListItemSecondaryAction>
+                            </ListItem>
+
+                            <ListItem key={6} dense button className={classes.listItem} >
+                                <Checkbox checked={this.state.visibility["AOP"]} onChange={this._onVisibilityChange.bind(this, "AOP")} value="true" color="default" tabIndex={-1} disableRipple />
+                                <ListItemText primary={`AOP`} />
+                                <ListItemSecondaryAction>
+                                    <Avatar alt="Apellations d'origine controllée" title="Apellations d'origine controllée" src={AOPIcon} />
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                        </List>
+                    </Collapse>
+
+
+
 
               </Drawer>
             </div>

@@ -4,7 +4,7 @@
   "short_name": "Map France",
   "name": "Map of France",
   "scope": "/",
-  "theme_color": "#0047ab",
+  "theme_color": "#14222D",
   "description": "Map of France to promote tourism and Sustainable Local Heritage Development, with points of interest and PDO regions",
   "orientation": "any",
   "icons": [
@@ -36,6 +36,6 @@
 ],
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#ffffff"
   
 }

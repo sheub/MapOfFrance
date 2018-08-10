@@ -13,10 +13,10 @@ export default class AppProvider extends Component {
             palette:
             {
                 primary: {
-                    main: "#0047AB",
+                    main: "#14222D",
                 },
                 secondary: {
-                    main: "#c2b686",
+                    main: "#9CB2C0",
                 }
             },
 
