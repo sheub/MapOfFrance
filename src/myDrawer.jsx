@@ -232,7 +232,6 @@ class MyDrawer extends Component {
                         </IconButton>
                     </div>
                     <Divider />
-                    <List>
                         <ListItem button onClick={this.handleClick} aria-label="Open Culture et Patrimoine">
 
                             <ListSubheader>Culture et Patrimoine</ListSubheader>
@@ -240,16 +239,16 @@ class MyDrawer extends Component {
                         </ListItem>
                         <Collapse in={this.state.list1Open} timeout="auto" unmountOnExit>
 
-
+                        <List>
                             <ListItem key={"Villages"} dense button className={classes.listItem} >
-                                <Checkbox tabIndex={1} checked={this.state.visibility["Villages"]} onChange={this._onVisibilityChange.bind(this, "Villages")} value="true" color="default" disableRipple />
+                                <Checkbox tabIndex={-1} checked={this.state.visibility["Villages"]} onChange={this._onVisibilityChange.bind(this, "Villages")} value="true" color="default" aria-label="VillagesCheckbox" disableRipple />
                                 <ListItemText primary={"Villages"} />
                                 <ListItemSecondaryAction>
                                     <Avatar alt="Plus beaux Villages de France" title="Plus beaux Villages de France" src={VillagesIcon} />
                                 </ListItemSecondaryAction>
                             </ListItem>
                             <ListItem key={"Unesco"} dense button className={classes.listItem} >
-                                <Checkbox tabIndex={2} checked={this.state.visibility["Unesco"]} onChange={this._onVisibilityChange.bind(this, "Unesco")} value="true" color="default" disableRipple />
+                                <Checkbox tabIndex={-1} checked={this.state.visibility["Unesco"]} onChange={this._onVisibilityChange.bind(this, "Unesco")} value="true" color="default" aria-label="UnescoCheckbox" disableRipple />
                                 <ListItemText primary={"Unesco"} />
                                 <ListItemSecondaryAction >
                                     <Avatar alt="Unesco World Heritage" title="Unesco World Heritage" src={UnescoIcon} />
@@ -257,7 +256,7 @@ class MyDrawer extends Component {
                             </ListItem>
 
                             <ListItem key={"Jardins"} dense button className={classes.listItem} >
-                                <Checkbox tabIndex={3} checked={this.state.visibility["Jardins"]} onChange={this._onVisibilityChange.bind(this, "Jardins")} value="true" color="default" disableRipple />
+                                <Checkbox tabIndex={-1} checked={this.state.visibility["Jardins"]} onChange={this._onVisibilityChange.bind(this, "Jardins")} value="true" color="default" aria-label="JardinsCheckbox" disableRipple />
                                 <ListItemText primary={"Jardins"} />
                                 <ListItemSecondaryAction >
                                     <Avatar alt="Jardins remarquables" title="Jardins remarquables" src={JardinsIcon} />
@@ -265,7 +264,7 @@ class MyDrawer extends Component {
                             </ListItem>
 
                             <ListItem key={"GSF"} dense button className={classes.listItem}>
-                                <Checkbox tabIndex={4} checked={this.state.visibility["GSF"]} onChange={this._onVisibilityChange.bind(this, "GSF")} value="true" color="default" disableRipple />
+                                <Checkbox tabIndex={-1} checked={this.state.visibility["GSF"]} onChange={this._onVisibilityChange.bind(this, "GSF")} value="true" color="default" aria-label="GSFCheckbox" disableRipple />
                                 <ListItemText primary={"Grands Sites"} />
                                 <ListItemSecondaryAction>
                                     <Avatar alt="Grand Site de France" title="Grand Site de France" src={GSFIcon} />
@@ -273,7 +272,7 @@ class MyDrawer extends Component {
                             </ListItem>
 
                             <ListItem key={"MN"} dense button className={classes.listItem}>
-                                <Checkbox tabIndex={5} checked={this.state.visibility["MN"]} onChange={this._onVisibilityChange.bind(this, "MN")} value="true" color="default" disableRipple />
+                                <Checkbox tabIndex={-1} checked={this.state.visibility["MN"]} onChange={this._onVisibilityChange.bind(this, "MN")} value="true" color="default" aria-label="MNCheckbox" disableRipple />
                                 <ListItemText primary={"Monuments"} />
                                 <ListItemSecondaryAction>
                                     <Avatar alt="Monuments Nationaux" title="Monuments Nationaux" src={GSFIcon} />
@@ -281,7 +280,7 @@ class MyDrawer extends Component {
                             </ListItem>
 
                             <ListItem key={"Museum"} dense button className={classes.listItem} >
-                                <Checkbox tabIndex={6} checked={this.state.visibility["Museum"]} onChange={this._onVisibilityChange.bind(this, "Museum")} value="true" color="default" disableRipple />
+                                <Checkbox tabIndex={-1} checked={this.state.visibility["Museum"]} onChange={this._onVisibilityChange.bind(this, "Museum")} value="true" color="default" aria-label="MuseumCheckbox" disableRipple />
                                 <ListItemText primary={"Museum"} />
                                 <ListItemSecondaryAction>
                                     <Avatar alt="Museum" title="Museum" src={MuseumIcon} />
@@ -289,19 +288,16 @@ class MyDrawer extends Component {
                             </ListItem>
 
                             <ListItem key={"AOP"} dense button className={classes.listItem} >
-                                <Checkbox tabIndex={7} checked={this.state.visibility["AOP"]} onChange={this._onVisibilityChange.bind(this, "AOP")} value="true" color="default" disableRipple />
+                                <Checkbox tabIndex={-1} checked={this.state.visibility["AOP"]} onChange={this._onVisibilityChange.bind(this, "AOP")} value="true" color="default" aria-label="AOPCheckbox" disableRipple />
                                 <ListItemText primary={"AOP"} />
                                 <ListItemSecondaryAction>
                                     <Avatar alt="Apellations d'origine controllée" title="Apellations d'origine controllée" src={AOPIcon} />
                                 </ListItemSecondaryAction>
                             </ListItem>
+                            </List>
+
                         
                     </Collapse>
-                    </List>
-
-
-
-
                 </Drawer>
             </div>
         </React.Fragment>;

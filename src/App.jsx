@@ -122,7 +122,7 @@ class App extends Component {
 
     this.setState({ popupInfo: features });
     this._renderPopup();
-    console.log(event);
+    // console.log(event);
   };
 
   state = {

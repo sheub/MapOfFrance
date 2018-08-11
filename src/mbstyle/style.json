@@ -21,7 +21,8 @@
     "sources": {
         "composite": {
 			"url": "mapbox://mapbox.mapbox-streets-v7,sheub.623zkazi,sheub.5wb1wtbj,sheub.0q76nwnl,sheub.4w8m41y7,sheub.4wjhcapt,sheub.byxxjcbp,sheub.9e12f1eo,sheub.72t5vtea",
-            "type": "vector"
+            "type": "vector",
+            "attribution": "<a href=\"https://www.mapbox.com/\" target=\"_blank\" rel=\"noopener\">&copy; Mapbox</a> <a href=\"http://www.openstreetmap.org/about/\" target=\"_blank\" rel=\"noopener\">&copy; OpenStreetMap contributors</a>"
         }
     },
     "sprite": "mapbox://sprites/sheub/cjk8ejp92h7e62smuojkqrgnx",
