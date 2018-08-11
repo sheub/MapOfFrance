@@ -3,7 +3,7 @@ import ReactMapGL, { Popup } from "react-map-gl";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
-import CityInfo from "./city-info.jsx";
+import CityInfo from "./PopupInfo";
 import MyDrawer from "./myDrawer"
 
 import "./App.css";
@@ -34,9 +34,9 @@ class App extends Component {
       viewport: {
         mapboxApiAccessToken:
           "pk.eyJ1Ijoic2hldWIiLCJhIjoiWGtobTNPNCJ9.v2JwlNSGBm_KxJUKE_WLig",
-        latitude: 46.2,
+        latitude: 46.5,
         longitude: 2.0,
-        zoom: 5.4,
+        zoom: 4.5,
         bearing: 0
       },
       popupInfo: null,

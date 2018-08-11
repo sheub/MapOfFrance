@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
-import Truncate from 'react-truncate';
+import Truncate from "react-truncate";
+import "./PopupInfo.css";
 
 
 function ShowOpeningHours(props) {
@@ -20,10 +21,10 @@ export default class CityInfo extends PureComponent {
   render() {
     const { info, layerId } = this.props;
     var displayName = info.label;
-    if (layerId.includes('aop')) {
+    if (layerId.includes("aop")) {
       return (
-        <div style={popPupStyle}>
-          <div style={baseText}>
+        <div className="popPupStyle">
+          <div className="baseText">
             {info.aire_geo}
           </div>
         </div>
@@ -31,12 +32,12 @@ export default class CityInfo extends PureComponent {
     }
     if (displayName && info.link) {
       return (
-        <div style={popPupStyle}>
-          <div style={baseText}>
-            <a target="_new" href={info.link} style={titleText}>{displayName}</a><br />
+        <div className="popPupStyle">
+          <div className="titleText">
+            <a target="_new" href={info.link} className="titleText">{displayName}</a><br />
           </div>
-          <img src={info.thumbnail} style={picturePoppup} alt={info.label} />
-          <div style={baseText}>
+          <img src={info.thumbnail} className="picturePoppup" alt={info.label} />
+          <div className="baseText">
             <Truncate lines={9} ellipsis={<span>... <a href={info.link}>More</a></span>}>
               {info.abstract}
             </Truncate>
@@ -46,10 +47,10 @@ export default class CityInfo extends PureComponent {
     }
     else if (displayName) {
       return (
-        <div style={popPupStyle}>
+        <div className="popPupStyle">
           <div>
-            <div style={baseText}>
-              <div style={titleText}>
+            <div className="baseText">
+              <div className="titleText">
                 {displayName}<br />
               </div>
               <div>
@@ -75,10 +76,10 @@ export default class CityInfo extends PureComponent {
         link = info.sitweb.includes("http://") ? info.sitweb : "http://" + info.sitweb;
       }
       return (
-        <div style={popPupStyle}>
+        <div className="popPupStyle">
           <div>
-            <div style={baseText}>
-              <div style={titleText}>
+            <div className="baseText">
+              <div className="titleText">
                 {displayName}<br />
               </div>
               <div>
@@ -95,32 +96,5 @@ export default class CityInfo extends PureComponent {
     }
   }
 }
-
-const baseText = {
-  fontFamily: 'Cochin',
-  width: 228,
-  marginLeft: 6,
-  marginBottom: 6,
-  marginTop: 6
-
-
-};
-
-const titleText = {
-  fontSize: 20,
-  fontWeight: 'bold',
-  textDecoration: 'none',
-  color: 'black',
-};
-
-const picturePoppup = {
-  width: 240,
-  paddingTop: 3
-};
-
-const popPupStyle = {
-  maxWidth: 240,
-  padding: 0
-};
 
 
