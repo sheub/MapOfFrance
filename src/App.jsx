@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import ReactMapGL, { Popup } from "react-map-gl";
+import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
 import CityInfo from "./city-info.jsx";
-import PropTypes from "prop-types";
-
-import MyDrawer from './myDrawer'
+import MyDrawer from "./myDrawer"
 
 import "./App.css";
 
@@ -66,16 +65,14 @@ class App extends Component {
   }
 
   _resize = () => {
-    var drawerWidth = 1;//8 * 7; //this.Drawer.theme.spacing.unit * 7;
+    var drawerWidth = 1;
     var height = 56;
 
     if (window.innerWidth > 600) {
       //drawerWidth = 8 * 9; //this.Drawer.theme.spacing.unit * 9;
       height = 64;
-    }
-
-    //Detect orientation window (portrait/Landscape)
-    if (window.innerHeight < window.innerWidth && window.innerWidth < 600) {
+      //Detect orientation window (portrait/Landscape)
+    } else if (window.innerHeight < window.innerWidth) {
       height = 48;
     }
 
@@ -98,22 +95,24 @@ class App extends Component {
     if (popupInfo === null) {
       return null;
     }
-    return (
-      popupInfo[0] && (
-        <Popup
-          tipSize={5}
-          anchor="top"
-          longitude={popupInfo.longitude}
-          latitude={popupInfo.latitude}
-          onClose={() => this.setState({ popupInfo: null })}
-        >
-          <CityInfo
-            layerId={popupInfo[0].layer.id}
-            info={popupInfo[0].properties}
-          />
-        </Popup>
-      )
-    );
+    else {
+      return (
+        popupInfo[0] && (
+          <Popup
+            tipSize={5}
+            anchor="top"
+            longitude={popupInfo.longitude}
+            latitude={popupInfo.latitude}
+            onClose={() => this.setState({ popupInfo: null })}
+          >
+            <CityInfo
+              layerId={popupInfo[0].layer.id}
+              info={popupInfo[0].properties}
+            />
+          </Popup>
+        )
+      );
+    }
   }
 
   _onClick = event => {
@@ -136,7 +135,7 @@ class App extends Component {
 
     return <React.Fragment>
       <div className={classes.root}>
-        <MyDrawer onChange={this._onStyleChange}/>
+        <MyDrawer onChange={this._onStyleChange} />
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
 

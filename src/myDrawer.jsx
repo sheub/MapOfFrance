@@ -14,38 +14,38 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
+import Checkbox from "@material-ui/core/Checkbox";
 
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
 
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
+import Collapse from "@material-ui/core/Collapse";
+import Avatar from "@material-ui/core/Avatar";
 
 
 
-import { fromJS } from 'immutable';
-import MAP_STYLE from './mbstyle/style.json';
+import { fromJS } from "immutable";
+import MAP_STYLE from "./mbstyle/style.json";
 
-import ListSubheader from '@material-ui/core/ListSubheader';
+import ListSubheader from "@material-ui/core/ListSubheader";
 
-import VillagesIcon from './mbstyle/icons/village-11.svg';
-import MuseumIcon from './mbstyle/icons/museum-11.svg';
-import UnescoIcon from './mbstyle/icons/World_Heritage_Logo_global_small.svg';
-import JardinsIcon from './mbstyle/icons/Jardins_Remarquables_15.svg';
-import GSFIcon from './mbstyle/icons/GSF.svg';
-import AOPIcon from './mbstyle/icons/AOP.svg';
+import VillagesIcon from "./mbstyle/icons/village-11.svg";
+import MuseumIcon from "./mbstyle/icons/museum-11.svg";
+import UnescoIcon from "./mbstyle/icons/World_Heritage_Logo_global_small.svg";
+import JardinsIcon from "./mbstyle/icons/Jardins_Remarquables_15.svg";
+import GSFIcon from "./mbstyle/icons/GSF.svg";
+import AOPIcon from "./mbstyle/icons/AOP.svg";
 
 
 import "./App.css";
 
 const defaultMapStyle = fromJS(MAP_STYLE);
 
-const categories = ['Unesco', 'Villages', 'Museum', 'AOP', 'Jardins', 'GSF', 'MN'];
+const categories = ["Unesco", "Villages", "Museum", "AOP", "Jardins", "GSF", "MN"];
 
 // Layer id patterns by category
 const layerSelector = {
