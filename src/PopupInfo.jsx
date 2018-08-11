@@ -34,11 +34,11 @@ export default class CityInfo extends PureComponent {
       return (
         <div className="popPupStyle">
           <div className="titleText">
-            <a target="_new" href={info.link} className="titleText">{displayName}</a><br />
+            <a target="_new" href={info.link} className="titleText" rel="noopener">{displayName}</a><br />
           </div>
           <img src={info.thumbnail} className="picturePoppup" alt={info.label} />
           <div className="baseText">
-            <Truncate lines={9} ellipsis={<span>... <a href={info.link}>More</a></span>}>
+            <Truncate lines={9} ellipsis={<span>... <a href={info.link} rel="noopener">More</a></span>}>
               {info.abstract}
             </Truncate>
           </div>
@@ -89,7 +89,7 @@ export default class CityInfo extends PureComponent {
                 {info.periode_ouverture}
               </div>
             </div>
-            <a target="_new" href={link}>Site internet</a>
+            <a target="_new" href={link} rel="noopener">Site internet</a>
           </div>
         </div>
       );

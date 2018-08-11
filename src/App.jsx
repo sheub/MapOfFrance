@@ -56,7 +56,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener("resize", this._resize);
+    window.addEventListener("resize", this._resize, {passive: true});
     this._resize();
   }
 

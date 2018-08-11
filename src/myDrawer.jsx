@@ -132,17 +132,17 @@ class MyDrawer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            visibility: { Museum: false, Villages: true, Unesco: true, AOP: false, Jardins: true, GSF: true, MN:true },
+            visibility: { Museum: false, Villages: true, Unesco: true, AOP: false, Jardins: true, GSF: true, MN: true },
             // Drawer opened per Default
-            open:true,
-            list1Open:true,
+            open: true,
+            list1Open: true,
 
         };
         this._defaultLayers = defaultMapStyle.get("layers");
         if (window.innerWidth < 600) {
             // Close Drawer per default for small screens
             this.state.open = false;
-          }
+        }
     }
 
     _onVisibilityChange(name, event) {
@@ -158,13 +158,13 @@ class MyDrawer extends Component {
     //     const { checked } = this.state;
     //     const currentIndex = checked.indexOf(value);
     //     const newChecked = [...checked];
-    
+
     //     if (currentIndex === -1) {
     //       newChecked.push(value);
     //     } else {
     //       newChecked.splice(currentIndex, 1);
     //     }
-    
+
     //     this.setState({
     //       checked: newChecked,
     //     });
@@ -207,102 +207,104 @@ class MyDrawer extends Component {
 
     handleClick = () => {
         this.setState(state => ({ list1Open: !state.list1Open }));
-      };
+    };
 
     render() {
         const { classes } = this.props;
 
         return <React.Fragment>
             <div className={classes.root}>
-              <CssBaseline />
-              <AppBar ref={elem => (this.AppBar = elem)} position="absolute" className={classNames(classes.appBar, this.state.open && classes.appBarShift)}>
-                <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
-                  <IconButton color="inherit" aria-label="Open drawer" onClick={this.handleDrawerOpen} className={classNames(classes.menuButton, this.state.open && classes.menuButtonHidden)}>
-                    <MenuIcon />
-                  </IconButton>
-                  <Typography variant="title" color="inherit" noWrap className={classes.title}>
-                    France découverte
+                <CssBaseline />
+                <AppBar ref={elem => (this.AppBar = elem)} position="absolute" className={classNames(classes.appBar, this.state.open && classes.appBarShift)}>
+                    <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
+                        <IconButton color="inherit" aria-label="Open drawer" onClick={this.handleDrawerOpen} className={classNames(classes.menuButton, this.state.open && classes.menuButtonHidden)}>
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="title" color="inherit" noWrap className={classes.title}>
+                            France découverte
                   </Typography>
-                </Toolbar>
-              </AppBar>
-              <Drawer ref={elem => (this.Drawer = elem)} variant="permanent" classes={{ paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose) }} open={this.state.open}>
-                <div className={classes.toolbarIcon}>
-                  <IconButton onClick={this.handleDrawerClose}>
-                    <ChevronLeftIcon />
-                  </IconButton>
-                </div>
-                <Divider />
-                <ListItem button onClick={this.handleClick}>
+                    </Toolbar>
+                </AppBar>
+                <Drawer ref={elem => (this.Drawer = elem)} variant="permanent" classes={{ paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose) }} open={this.state.open}>
+                    <div className={classes.toolbarIcon}>
+                        <IconButton onClick={this.handleDrawerClose} aria-label="Close drawer">
+                            <ChevronLeftIcon />
+                        </IconButton>
+                    </div>
+                    <Divider />
+                    <List>
+                        <ListItem button onClick={this.handleClick} aria-label="Open Culture et Patrimoine">
 
-                        <ListSubheader>Culture et Patrimoine</ListSubheader>
-                        {this.state.list1Open ? <ExpandLess /> : <ExpandMore />}
-                    </ListItem>
-                    <Collapse in={this.state.list1Open} timeout="auto" unmountOnExit>
+                            <ListSubheader>Culture et Patrimoine</ListSubheader>
+                            {this.state.list1Open ? <ExpandLess /> : <ExpandMore />}
+                        </ListItem>
+                        <Collapse in={this.state.list1Open} timeout="auto" unmountOnExit>
 
-                        <List>
+
                             <ListItem key={"Villages"} dense button className={classes.listItem} >
-                                <Checkbox checked={this.state.visibility["Villages"]} onChange={this._onVisibilityChange.bind(this, "Villages")} value="true" color="default" tabIndex={-1} disableRipple />
-                                <ListItemText primary={`Villages`} />
+                                <Checkbox tabIndex={1} checked={this.state.visibility["Villages"]} onChange={this._onVisibilityChange.bind(this, "Villages")} value="true" color="default" disableRipple />
+                                <ListItemText primary={"Villages"} />
                                 <ListItemSecondaryAction>
                                     <Avatar alt="Plus beaux Villages de France" title="Plus beaux Villages de France" src={VillagesIcon} />
                                 </ListItemSecondaryAction>
                             </ListItem>
                             <ListItem key={"Unesco"} dense button className={classes.listItem} >
-                                <Checkbox checked={this.state.visibility["Unesco"]} onChange={this._onVisibilityChange.bind(this, "Unesco")} value="true" color="default" tabIndex={-1} disableRipple />
-                                <ListItemText primary={`Unesco`} />
+                                <Checkbox tabIndex={2} checked={this.state.visibility["Unesco"]} onChange={this._onVisibilityChange.bind(this, "Unesco")} value="true" color="default" disableRipple />
+                                <ListItemText primary={"Unesco"} />
                                 <ListItemSecondaryAction >
-                                    <Avatar  alt="Unesco World Heritage" title="Unesco World Heritage" src={UnescoIcon} />
+                                    <Avatar alt="Unesco World Heritage" title="Unesco World Heritage" src={UnescoIcon} />
                                 </ListItemSecondaryAction>
                             </ListItem>
 
                             <ListItem key={"Jardins"} dense button className={classes.listItem} >
-                                <Checkbox checked={this.state.visibility["Jardins"]} onChange={this._onVisibilityChange.bind(this, "Jardins")} value="true" color="default" tabIndex={-1} disableRipple />
-                                <ListItemText primary={`Jardins`} />
+                                <Checkbox tabIndex={3} checked={this.state.visibility["Jardins"]} onChange={this._onVisibilityChange.bind(this, "Jardins")} value="true" color="default" disableRipple />
+                                <ListItemText primary={"Jardins"} />
                                 <ListItemSecondaryAction >
                                     <Avatar alt="Jardins remarquables" title="Jardins remarquables" src={JardinsIcon} />
                                 </ListItemSecondaryAction>
                             </ListItem>
 
                             <ListItem key={"GSF"} dense button className={classes.listItem}>
-                                <Checkbox checked={this.state.visibility["GSF"]} onChange={this._onVisibilityChange.bind(this, "GSF")} value="true" color="default" tabIndex={-1} disableRipple />
-                                <ListItemText primary={`Grands Sites`} />
+                                <Checkbox tabIndex={4} checked={this.state.visibility["GSF"]} onChange={this._onVisibilityChange.bind(this, "GSF")} value="true" color="default" disableRipple />
+                                <ListItemText primary={"Grands Sites"} />
                                 <ListItemSecondaryAction>
                                     <Avatar alt="Grand Site de France" title="Grand Site de France" src={GSFIcon} />
                                 </ListItemSecondaryAction>
                             </ListItem>
 
                             <ListItem key={"MN"} dense button className={classes.listItem}>
-                                <Checkbox checked={this.state.visibility["MN"]} onChange={this._onVisibilityChange.bind(this, "MN")} value="true" color="default" tabIndex={-1} disableRipple />
-                                <ListItemText primary={`Monuments`} />
+                                <Checkbox tabIndex={5} checked={this.state.visibility["MN"]} onChange={this._onVisibilityChange.bind(this, "MN")} value="true" color="default" disableRipple />
+                                <ListItemText primary={"Monuments"} />
                                 <ListItemSecondaryAction>
                                     <Avatar alt="Monuments Nationaux" title="Monuments Nationaux" src={GSFIcon} />
                                 </ListItemSecondaryAction>
                             </ListItem>
 
-                            <ListItem key={5} dense button className={classes.listItem} >
-                                <Checkbox checked={this.state.visibility["Museum"]} onChange={this._onVisibilityChange.bind(this, "Museum")} value="true" color="default" tabIndex={-1} disableRipple />
-                                <ListItemText primary={`Museum`} />
+                            <ListItem key={"Museum"} dense button className={classes.listItem} >
+                                <Checkbox tabIndex={6} checked={this.state.visibility["Museum"]} onChange={this._onVisibilityChange.bind(this, "Museum")} value="true" color="default" disableRipple />
+                                <ListItemText primary={"Museum"} />
                                 <ListItemSecondaryAction>
                                     <Avatar alt="Museum" title="Museum" src={MuseumIcon} />
                                 </ListItemSecondaryAction>
                             </ListItem>
 
-                            <ListItem key={6} dense button className={classes.listItem} >
-                                <Checkbox checked={this.state.visibility["AOP"]} onChange={this._onVisibilityChange.bind(this, "AOP")} value="true" color="default" tabIndex={-1} disableRipple />
-                                <ListItemText primary={`AOP`} />
+                            <ListItem key={"AOP"} dense button className={classes.listItem} >
+                                <Checkbox tabIndex={7} checked={this.state.visibility["AOP"]} onChange={this._onVisibilityChange.bind(this, "AOP")} value="true" color="default" disableRipple />
+                                <ListItemText primary={"AOP"} />
                                 <ListItemSecondaryAction>
                                     <Avatar alt="Apellations d'origine controllée" title="Apellations d'origine controllée" src={AOPIcon} />
                                 </ListItemSecondaryAction>
                             </ListItem>
-                        </List>
+                        
                     </Collapse>
+                    </List>
 
 
 
 
-              </Drawer>
+                </Drawer>
             </div>
-          </React.Fragment>;
+        </React.Fragment>;
     }
 }
 MyDrawer.propTypes = {
