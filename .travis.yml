@@ -1,0 +1,4 @@
+//.travis.yml
+script:
+  - jest
+  - eslint src --ext .js --ext .jsx

@@ -7,4 +7,3 @@ build:
             tests:
                 override:
                     - js-scrutinizer-run
-                    - jsx-scrutinizer-run
