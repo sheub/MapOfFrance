@@ -37,13 +37,10 @@ input {
 .controlPanelIcon {
   width: 18px;
   height: 18px;
-  /* padding-left: 6px; */
   margin-left: 11px;
   margin-bottom: 1px;
   margin-right: -7px;
   vertical-align: middle;
-  /* background-color: aliceblue; */
-
 }
 
 .tooltip {
@@ -65,5 +62,8 @@ input {
 @media only screen and (max-width: 480px) {
   .mapboxgl-popup-content {
       max-width: 250px;
+      position:absolute; 
+      top:0;
+      bottom:0;
   }
 }

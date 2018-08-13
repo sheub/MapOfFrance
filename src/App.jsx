@@ -1,13 +1,17 @@
 import React, { Component } from "react";
-import ReactMapGL, { Popup } from "react-map-gl";
+import MapGL, { MapEvents, Popup } from "react-map-gl-alt";
+import MAP_STYLE from "./mbstyle/style.json";
+import { fromJS } from 'immutable';
+
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
 import CityInfo from "./PopupInfo";
-import MyDrawer from "./myDrawer"
+import MyDrawer from "./myDrawer";
 
 import "./App.css";
 
+const defaultMapStyle = fromJS(MAP_STYLE);
 
 const styles = theme => ({
   root: {
@@ -21,42 +25,45 @@ const styles = theme => ({
   }
 });
 
-// var bounds = [
-//   [12.179, 51.227], // Southwest coordinates
-//   [12.6, 51.459] // Northeast coordinates
-// ];
+var bounds = [
+  [-10, 39], // Southwest coordinates
+  [14, 54] // Northeast coordinates
+];
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mapStyle: "",
+      mapStyle: { defaultMapStyle },
+      // loaded: true,
       viewport: {
-        mapboxApiAccessToken:
-          "pk.eyJ1Ijoic2hldWIiLCJhIjoiWGtobTNPNCJ9.v2JwlNSGBm_KxJUKE_WLig",
+        mapboxApiAccessToken: "pk.eyJ1Ijoic2hldWIiLCJhIjoiWGtobTNPNCJ9.v2JwlNSGBm_KxJUKE_WLig",
+        center: [2, 46.5],
         latitude: 46.5,
         longitude: 2.0,
         zoom: 4.5,
         bearing: 0
       },
+
       popupInfo: null,
+      // Holds visible airport features for filtering
+      airports: [],
+
     };
+    this._updateViewport = this._updateViewport.bind(this);
+
   }
 
   _onStyleChange = mapStyle => this.setState({ mapStyle });
 
-
-  _onVisibilityChange(name, event) {
-    const visibility = { ...this.state.visibility, [name]: event.target.checked };
-    this.setState({ visibility });
-    this._updateMapStyle({
-      ...this.state,
-      visibility
-    });
-  }
-
   componentDidMount() {
-    window.addEventListener("resize", this._resize, {passive: true});
+    window.addEventListener("resize", this._resize, { passive: true });
+    //window.addEventListener("resize", this._resize);
+    this.setState({
+      filterEl: document.getElementById("feature-filter"),
+      listingEl: document.getElementById("feature-listing")
+    });
+
     this._resize();
   }
 
@@ -79,30 +86,34 @@ class App extends Component {
     this.setState({
       viewport: {
         ...this.state.viewport,
-        width: this.props.width || window.innerWidth - drawerWidth,
-        height: this.props.height || window.innerHeight - height
-      }
+        width: window.innerWidth - drawerWidth,
+        height: window.innerHeight - height
+      },
+      mapWidth: window.innerWidth - drawerWidth,
+      mapHeight: window.innerHeight - height
     });
+    console.log(this.state.mapWidth);
+    console.log(this.state.viewport.width);
+
   };
 
-  _updateViewport = viewport => {
-    this.setState({ viewport });
-  };
+  _updateViewport(viewport) { this.setState({ viewport }); }
+  // _updateViewport = viewport => {this.setState({ viewport });};
 
-  _renderPopup() {
+  _renderPopup(event) {
     const { popupInfo } = this.state;
 
-    if (popupInfo === null) {
+    if (popupInfo === null || event === null) {
       return null;
-    }
-    else {
+    } else {
+      const { lngLat } = event;
       return (
         popupInfo[0] && (
           <Popup
             tipSize={5}
             anchor="top"
-            longitude={popupInfo.longitude}
-            latitude={popupInfo.latitude}
+            longitude={lngLat[0]}
+            latitude={lngLat[1]}
             onClose={() => this.setState({ popupInfo: null })}
           >
             <CityInfo
@@ -116,43 +127,89 @@ class App extends Component {
   }
 
   _onClick = event => {
-    const { features, lngLat } = event;
-    features.longitude = lngLat[0];
-    features.latitude = lngLat[1];
-
-    this.setState({ popupInfo: features });
-    this._renderPopup();
-    // console.log(event);
+    // const features = event.target.queryRenderedFeatures(event.point);
+    // TODO CHeck features[0]
+    // this.setState({ popupInfo: features[0] });
+    // this._renderPopup(event);
   };
+
+  mapMoveEnd(event) {
+    //const visibility  = {this.state.visibility};
+    var features = event.target.queryRenderedFeatures({ layers: ['villages-frenchcorrected-3gqhy6'] });
+
+    if (features) {
+      var { filterEl } = this.state;
+      var uniqueFeatures = this.getUniqueFeatures(features, "iata_code");
+      // Populate features for the listing overlay.
+      this.renderListings(uniqueFeatures);
+
+      // Clear the input container
+      filterEl.value = "";
+
+      // Store the current features in sn `airports` variable to
+      // later use for filtering on `keyup`.
+      this.setState({ airports: uniqueFeatures });
+    }
+  }
+
+  mapMouseMove(e) {
+    // Change the cursor style as a UI indicator.
+    // map.getCanvas().style.cursor = 'pointer';
+    // Populate the popup and set its coordinates based on the feature.
+    // var feature = e.features[0];
+    // popup.setLngLat(feature.geometry.coordinates)
+    //     .setText(feature.properties.name + ' (' + feature.properties.abbrev + ')')
+    //     .addTo(map);
+  }
 
   state = {
     open: false
   };
-
   render() {
-    const { viewport, mapStyle } = this.state;
+    const { viewport, mapStyle, mapWidth, mapHeight } = this.state;
     const { classes } = this.props;
 
-    return <React.Fragment>
-      <div className={classes.root}>
-        <MyDrawer onChange={this._onStyleChange} />
-        <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
+    return (
+      <React.Fragment>
+        <div className={classes.root}>
+          <MyDrawer onChange={this._onStyleChange} />
+          <main className={classes.content}>
+            <div className={classes.appBarSpacer} />
+            <MapGL
+              {...viewport}
+              mapStyle={mapStyle}
+              mapboxApiAccessToken="pk.eyJ1Ijoic2hldWIiLCJhIjoiWGtobTNPNCJ9.v2JwlNSGBm_KxJUKE_WLig"
+              style={{
+                // display: "flex",
+                // flex: 1,
+                width: mapWidth,
+                height: mapHeight
+              }}
+              maxZoom={14}
+              maxBounds={bounds}
+              //onChangeViewport={this._updateViewport}
+              onChangeViewport={(viewport) => this.setState({ viewport })}
+              trackResizeContainerDisabled={false}
 
-          <ReactMapGL
-            {...viewport}
-            mapStyle={mapStyle}
-            onViewportChange={this._updateViewport}
-            onClick={this._onClick}
-            mapboxApiAccessToken="pk.eyJ1Ijoic2hldWIiLCJhIjoiWGtobTNPNCJ9.v2JwlNSGBm_KxJUKE_WLig"
-            maxZoom={14}>
+            >
+              {/* {this._renderPopup(null)} */}
 
-            {this._renderPopup()}
-
-          </ReactMapGL>
-        </main>
-      </div>
-    </React.Fragment>;
+              <MapEvents
+                // onLoad={() => {
+                //   this.setState({ loaded: true });
+                // }}
+                // onError={console.error}
+                // onMove={this.mapMoveEnd}
+                // onMoveEnd={this.mapMoveEnd.bind(this)}
+                // onMouseMove={this.mapMouseMove}
+                // onMouseLeave={this.mapMouseLeave}
+                onClick={this._onClick}
+              />
+            </MapGL>
+          </main>
+        </div>
+      </React.Fragment>
+    );
   }
 }
 App.propTypes = {

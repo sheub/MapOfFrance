@@ -21,9 +21,8 @@
     "sources": {
         "composite": {
 			"url": "mapbox://mapbox.mapbox-streets-v7,sheub.623zkazi,sheub.5wb1wtbj,sheub.0q76nwnl,sheub.4w8m41y7,sheub.4wjhcapt,sheub.byxxjcbp,sheub.9e12f1eo,sheub.72t5vtea",
-            "type": "vector",
-            "attribution": "<a href=\"https://www.mapbox.com/\" target=\"_blank\" rel=\"noopener\">&copy; Mapbox</a> <a href=\"http://www.openstreetmap.org/about/\" target=\"_blank\" rel=\"noopener\">&copy; OpenStreetMap contributors</a>"
-        }
+            "type": "vector"
+            }
     },
     "sprite": "mapbox://sprites/sheub/cjk8ejp92h7e62smuojkqrgnx",
     "glyphs": "mapbox://fonts/sheub/{fontstack}/{range}.pbf",
@@ -2031,7 +2030,9 @@
                 "Point"
             ],
             "layout": {
-                "icon-image": "World_Heritage_Logo_global_small"
+                "icon-image": "World_Heritage_Logo_global_small",
+                "icon-padding": 0,
+            "icon-allow-overlap":true
             },
             "paint": {},
             "interactive": true
@@ -2056,7 +2057,9 @@
                     "village-11",
                     22,
                     "village-11"
-                ]
+                ],
+                "icon-padding": 0,
+            "icon-allow-overlap":true
             },
             "paint": {},
             "interactive": true
@@ -2073,7 +2076,9 @@
             ],
             "layout": {
                 "visibility": "visible",
-                "icon-image": "Jardins_Remarquables_15"
+                "icon-image": "Jardins_Remarquables_15",
+                "icon-padding": 0,
+                "icon-allow-overlap":true
             },
             "paint": {},
             "interactive": true

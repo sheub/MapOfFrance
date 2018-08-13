@@ -19,13 +19,14 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
+import SvgIcon from '@material-ui/core/SvgIcon';
+
+
 
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 
 import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
-
 
 
 import { fromJS } from "immutable";
@@ -58,6 +59,13 @@ const layerSelector = {
     MN: /edifice-geres-par-les-monumen-3inr6v/
 };
 
+function HomeIcon(props) {
+    return (
+        <SvgIcon {...props}>
+              <circle cx="10" cy="10" r="9"/>
+        </SvgIcon>
+    );
+}
 
 const drawerWidth = 240;
 
@@ -125,6 +133,9 @@ const styles = theme => ({
     content: {
         flexGrow: 0,
         padding: theme.spacing.unit * 0
+    },
+    icon:{
+        width:25
     }
 });
 
@@ -244,14 +255,14 @@ class MyDrawer extends Component {
                                 <Checkbox tabIndex={-1} checked={this.state.visibility["Villages"]} onChange={this._onVisibilityChange.bind(this, "Villages")} value="true" color="default" aria-label="VillagesCheckbox" disableRipple />
                                 <ListItemText primary={"Villages"} />
                                 <ListItemSecondaryAction>
-                                    <Avatar alt="Plus beaux Villages de France" title="Plus beaux Villages de France" src={VillagesIcon} />
+                                    <img className={classes.icon} alt="Plus beaux Villages de France" title="Plus beaux Villages de France" src={VillagesIcon} />
                                 </ListItemSecondaryAction>
                             </ListItem>
                             <ListItem key={"Unesco"} dense button className={classes.listItem} >
                                 <Checkbox tabIndex={-1} checked={this.state.visibility["Unesco"]} onChange={this._onVisibilityChange.bind(this, "Unesco")} value="true" color="default" aria-label="UnescoCheckbox" disableRipple />
                                 <ListItemText primary={"Unesco"} />
                                 <ListItemSecondaryAction >
-                                    <Avatar alt="Unesco World Heritage" title="Unesco World Heritage" src={UnescoIcon} />
+                                    <img className={classes.icon} alt="Unesco World Heritage" title="Unesco World Heritage" src={UnescoIcon} />
                                 </ListItemSecondaryAction>
                             </ListItem>
 
@@ -259,7 +270,7 @@ class MyDrawer extends Component {
                                 <Checkbox tabIndex={-1} checked={this.state.visibility["Jardins"]} onChange={this._onVisibilityChange.bind(this, "Jardins")} value="true" color="default" aria-label="JardinsCheckbox" disableRipple />
                                 <ListItemText primary={"Jardins"} />
                                 <ListItemSecondaryAction >
-                                    <Avatar alt="Jardins remarquables" title="Jardins remarquables" src={JardinsIcon} />
+                                    <img className={classes.icon} alt="Jardins remarquables" title="Jardins remarquables" src={JardinsIcon} />
                                 </ListItemSecondaryAction>
                             </ListItem>
 
@@ -267,7 +278,7 @@ class MyDrawer extends Component {
                                 <Checkbox tabIndex={-1} checked={this.state.visibility["GSF"]} onChange={this._onVisibilityChange.bind(this, "GSF")} value="true" color="default" aria-label="GSFCheckbox" disableRipple />
                                 <ListItemText primary={"Grands Sites"} />
                                 <ListItemSecondaryAction>
-                                    <Avatar alt="Grand Site de France" title="Grand Site de France" src={GSFIcon} />
+                                    <img className={classes.icon} alt="Grand Site de France" title="Grand Site de France" src={GSFIcon} />
                                 </ListItemSecondaryAction>
                             </ListItem>
 
@@ -275,7 +286,8 @@ class MyDrawer extends Component {
                                 <Checkbox tabIndex={-1} checked={this.state.visibility["MN"]} onChange={this._onVisibilityChange.bind(this, "MN")} value="true" color="default" aria-label="MNCheckbox" disableRipple />
                                 <ListItemText primary={"Monuments"} />
                                 <ListItemSecondaryAction>
-                                    <Avatar alt="Monuments Nationaux" title="Monuments Nationaux" src={GSFIcon} />
+                                <HomeIcon className={classes.icon} style={{color:"#1f08a6"}} />
+                                    {/* <img className={classes.icon} alt="Monuments Nationaux" title="Monuments Nationaux" src={GSFIcon} /> */}
                                 </ListItemSecondaryAction>
                             </ListItem>
 
@@ -283,7 +295,7 @@ class MyDrawer extends Component {
                                 <Checkbox tabIndex={-1} checked={this.state.visibility["Museum"]} onChange={this._onVisibilityChange.bind(this, "Museum")} value="true" color="default" aria-label="MuseumCheckbox" disableRipple />
                                 <ListItemText primary={"Museum"} />
                                 <ListItemSecondaryAction>
-                                    <Avatar alt="Museum" title="Museum" src={MuseumIcon} />
+                                    <img className={classes.icon} alt="Museum" title="Museum" src={MuseumIcon} />
                                 </ListItemSecondaryAction>
                             </ListItem>
 
@@ -291,7 +303,7 @@ class MyDrawer extends Component {
                                 <Checkbox tabIndex={-1} checked={this.state.visibility["AOP"]} onChange={this._onVisibilityChange.bind(this, "AOP")} value="true" color="default" aria-label="AOPCheckbox" disableRipple />
                                 <ListItemText primary={"AOP"} />
                                 <ListItemSecondaryAction>
-                                    <Avatar alt="Apellations d'origine controllée" title="Apellations d'origine controllée" src={AOPIcon} />
+                                    <img className={classes.icon} alt="Apellations d'origine controllée" title="Apellations d'origine controllée" src={AOPIcon} />
                                 </ListItemSecondaryAction>
                             </ListItem>
                             </List>
