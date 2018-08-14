@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import MapGL, { MapEvents, Popup } from "react-map-gl-alt";
 import MAP_STYLE from "./mbstyle/style.json";
-import { fromJS } from 'immutable';
+import { fromJS } from "immutable";
 
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
@@ -135,7 +135,7 @@ class App extends Component {
 
   mapMoveEnd(event) {
     //const visibility  = {this.state.visibility};
-    var features = event.target.queryRenderedFeatures({ layers: ['villages-frenchcorrected-3gqhy6'] });
+    var features = event.target.queryRenderedFeatures({ layers: ["villages-frenchcorrected-3gqhy6"] });
 
     if (features) {
       var { filterEl } = this.state;
